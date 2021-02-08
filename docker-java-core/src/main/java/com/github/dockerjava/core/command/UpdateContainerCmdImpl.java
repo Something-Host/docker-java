@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.dockerjava.api.command.UpdateContainerCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
+import com.github.dockerjava.api.model.ResourceSpecs;
 import com.github.dockerjava.api.model.UpdateContainerResponse;
 import com.github.dockerjava.core.RemoteApiVersion;
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -54,6 +55,9 @@ public class UpdateContainerCmdImpl extends AbstrDockerCmd<UpdateContainerCmd, U
 
     @JsonProperty("KernelMemory")
     private Long kernelMemory;
+
+    @JsonProperty("NanoCpus")
+    private Long nanoCpus;
 
     public UpdateContainerCmdImpl(UpdateContainerCmd.Exec exec, String containerId) {
         super(exec);
@@ -238,12 +242,29 @@ public class UpdateContainerCmdImpl extends AbstrDockerCmd<UpdateContainerCmd, U
     }
 
     /**
+     * @see #nanoCpus
+     */
+    @CheckForNull
+    public Long getNanoCPUs() {
+        return nanoCpus;
+    }
+
+    /**
+     * @see #nanoCpus
+     */
+    public UpdateContainerCmd withNanoCPUs(Long nanoCPUs) {
+        this.nanoCpus = nanoCPUs;
+        return this;
+    }
+
+    /**
      * @throws NotFoundException No such container
      */
     @Override
     public UpdateContainerResponse exec() throws NotFoundException {
         return super.exec();
     }
+
 
     @Override
     public String toString() {

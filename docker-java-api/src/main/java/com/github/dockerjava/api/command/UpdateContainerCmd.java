@@ -1,5 +1,6 @@
 package com.github.dockerjava.api.command;
 
+import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.UpdateContainerResponse;
 
 import javax.annotation.CheckForNull;
@@ -64,6 +65,11 @@ public interface UpdateContainerCmd extends SyncDockerCmd<UpdateContainerRespons
     Long getMemorySwap();
 
     UpdateContainerCmd withMemorySwap(Long memorySwap);
+
+    @CheckForNull
+     Long getNanoCPUs();
+
+    UpdateContainerCmd withNanoCPUs(Long nanoCPUs);
 
     interface Exec extends DockerCmdSyncExec<UpdateContainerCmd, UpdateContainerResponse> {
     }
